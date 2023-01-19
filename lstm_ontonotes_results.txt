@@ -1,0 +1,30 @@
+precision    recall  f1-score   support
+
+    I-ORDINAL       0.00      0.00      0.00         6
+        B-LOC       0.00      0.00      0.00       180
+        I-GPE       0.00      0.00      0.00       635
+        B-FAC       0.00      0.00      0.00       126
+   B-QUANTITY       0.00      0.00      0.00       135
+    B-PERCENT       0.83      0.20      0.33       347
+       I-TIME       0.83      0.04      0.08       252
+      B-MONEY       0.38      0.04      0.07       295
+      B-EVENT       0.00      0.00      0.00        77
+      I-EVENT       0.00      0.00      0.00       144
+    I-PERCENT       0.96      0.05      0.10       495
+        I-LAW       0.00      0.00      0.00        94
+B-WORK_OF_ART       0.00      0.00      0.00       152
+      I-MONEY       0.91      0.05      0.10       604
+        I-LOC       0.00      0.00      0.00       174
+       I-NORP       0.00      0.00      0.00       145
+   I-QUANTITY       0.00      0.00      0.00       229
+        I-FAC       0.00      0.00      0.00       188
+I-WORK_OF_ART       0.00      0.00      0.00       288
+       B-DATE       0.66      0.03      0.05      1621
+   B-CARDINAL       0.00      0.00      0.00       937
+    I-PRODUCT       0.00      0.00      0.00        53
+    B-PRODUCT       0.00      0.00      0.00        73
+     B-PERSON       0.67      0.00      0.00      2001
+
+    micro avg       0.75      0.02      0.03     20591
+    macro avg       0.29      0.01      0.02     20591
+ weighted avg       0.63      0.02      0.03     20591
