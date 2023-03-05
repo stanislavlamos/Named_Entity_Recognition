@@ -5,10 +5,9 @@ from sklearn.metrics import classification_report
 import pandas as pd
 from sklearn.metrics.pairwise import cosine_similarity
 
-ft_model = fasttext.load_model('/mnt/c/Lamosst/FEL/Paty_semestr/Projekt_bakalarka/research-test/task/classification/token/ner/wiki.simple.bin')
-#print(ft_model.get_dimension())
-#fasttext.util.reduce_model(ft_model, 100)
-#ft_model.save_model(path="/mnt/c/Lamosst/FEL/Paty_semestr/Projekt_bakalarka/research-test/task/classification/token/ner/wiki.simple100.bin")
+
+ft_model = fasttext.load_model("wiki.simple.bin")
+
 
 class FasttextJob:
     def __init__(self, test_path, train_path, separator, labels_path):
@@ -25,7 +24,6 @@ class FasttextJob:
 
     def load_dataset(self):
         self.labels = self.get_all_labels_without_iob()
-        print(self.labels)
         self.train_data_df = self.read_dataset_to_df(self.train_path, self.separator)
         self.test_data_df = self.read_dataset_to_df(self.test_path, self.separator)
 
@@ -85,7 +83,8 @@ class FasttextJob:
             cur_cos_similarities = np.zeros(len(labels_with_outside))
 
             for i in range(len(labels_with_outside)):
-                cur_cos_similarities[i] = cosine_similarity(cur_token_embedding.T, self.entity_embeddings[:, i].reshape((300, 1)).T).flatten()
+                cur_cos_similarities[i] = cosine_similarity(cur_token_embedding.T,
+                                                            self.entity_embeddings[:, i].reshape((300, 1)).T).flatten()
 
             entity_index = np.argmax(cur_cos_similarities)
             self.test_data_df.at[cur_index, 'PRED_NE'] = labels_with_outside[entity_index]
@@ -118,10 +117,11 @@ class FasttextJob:
 
         return list(all_labels)
 
+
 def run_on_ontonotes():
-    train_path = "/mnt/c/Lamosst/FEL/Paty_semestr/Projekt_bakalarka/research-test/data/ner/ontonotes5.0/train.conll"
-    test_path = "/mnt/c/Lamosst/FEL/Paty_semestr/Projekt_bakalarka/research-test/data/ner/ontonotes5.0/test.conll"
-    labels_path = "/mnt/c/Lamosst/FEL/Paty_semestr/Projekt_bakalarka/research-test/data/ner/ontonotes5.0/labels.txt"
+    train_path = "./data/ontonotes5.0/train.conll"
+    test_path = "./data/ontonotes5.0/test.conll"
+    labels_path = "./data/ontonotes5.0/labels.txt"
 
     fasttext_job = FasttextJob(
         train_path=train_path,
@@ -136,9 +136,9 @@ def run_on_ontonotes():
 
 
 def run_on_conll():
-    train_path = "/mnt/c/Lamosst/FEL/Paty_semestr/Projekt_bakalarka/research-test/data/ner/conll2003/train.txt"
-    test_path = "/mnt/c/Lamosst/FEL/Paty_semestr/Projekt_bakalarka/research-test/data/ner/conll2003/test.txt"
-    labels_path = "/mnt/c/Lamosst/FEL/Paty_semestr/Projekt_bakalarka/research-test/data/ner/conll2003/labels.txt"
+    train_path = "./data/conll2003/train.txt"
+    test_path = "./data/conll2003/test.txt"
+    labels_path = "./data/conll2003/labels.txt"
 
     fasttext_job = FasttextJob(
         train_path=train_path,
@@ -151,6 +151,7 @@ def run_on_conll():
     fasttext_job.evaluate_dataset()
     print(fasttext_job.evaluate_dict)
 
+
 if __name__ == "__main__":
     run_on_conll()
-    #run_on_ontonotes()
+    run_on_ontonotes()

@@ -1,6 +1,5 @@
 from sklearn.metrics import classification_report
 import pandas as pd
-import fasttext
 
 
 class DictionaryJob:
@@ -17,7 +16,6 @@ class DictionaryJob:
 
     def load_dataset(self):
         self.labels = self.get_all_labels_without_iob()
-        print(self.labels)
         self.train_data_df = self.read_dataset_to_df(self.train_path, self.separator)
         self.test_data_df = self.read_dataset_to_df(self.test_path, self.separator)
 
@@ -94,9 +92,9 @@ class DictionaryJob:
 
 
 def run_on_ontonotes():
-    train_path = "/mnt/c/Lamosst/FEL/Paty_semestr/Projekt_bakalarka/research-test/data/ner/ontonotes5.0/train.conll"
-    test_path = "/mnt/c/Lamosst/FEL/Paty_semestr/Projekt_bakalarka/research-test/data/ner/ontonotes5.0/test.conll"
-    labels_path = "/mnt/c/Lamosst/FEL/Paty_semestr/Projekt_bakalarka/research-test/data/ner/ontonotes5.0/labels.txt"
+    train_path = "./data/ontonotes5.0/train.conll"
+    test_path = "./data/ontonotes5.0/test.conll"
+    labels_path = "./data/ontonotes5.0/labels.txt"
 
     dictionary_job = DictionaryJob(
         train_path=train_path,
@@ -110,9 +108,9 @@ def run_on_ontonotes():
 
 
 def run_on_conll():
-    train_path = "/mnt/c/Lamosst/FEL/Paty_semestr/Projekt_bakalarka/research-test/data/ner/conll2003/train.txt"
-    test_path = "/mnt/c/Lamosst/FEL/Paty_semestr/Projekt_bakalarka/research-test/data/ner/conll2003/test.txt"
-    labels_path = "/mnt/c/Lamosst/FEL/Paty_semestr/Projekt_bakalarka/research-test/data/ner/conll2003/labels.txt"
+    train_path = "./data/conll2003/train.txt"
+    test_path = "./data/conll2003/test.txt"
+    labels_path = "./data/conll2003/labels.txt"
 
     dictionary_job = DictionaryJob(
         train_path=train_path,
@@ -126,6 +124,5 @@ def run_on_conll():
 
 
 if __name__ == "__main__":
-    print("Hi")
-    #run_on_ontonotes()
+    run_on_ontonotes()
     #run_on_conll()
